@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public float moveSpeed=20f;
+    private Rigidbody rbody;
+    private Renderer rend;
+    public Color color;
+    // Start is called before the first frame update
+    void Start()
+    {
+       rbody=GetComponent<Rigidbody>();
+       rend=GetComponent<Renderer>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float inputX=Input.GetAxis("Horizontal");
+        float inputZ=Input.GetAxis("Vertical");
+        float moveX=inputX*moveSpeed*Time.deltaTime;
+        float moveZ=inputZ*moveSpeed*Time.deltaTime;
+        rbody.AddForce(moveX,0,moveZ);
+    }
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.collider.name=="Cube (1)")
+        {
+            rend.material.color=Color.blue;
+        }
+        else if(col.collider.name=="Cube (2)")
+        {
+            rend.material.color=Color.green;
+        }
+        else if(col.collider.name=="Cube")
+        {
+            rend.material.color=Color.white;
+        }
+         else if(col.collider.name=="Cube (3)")
+        {
+            rend.material.color=Color.red;
+        }
+          else if(col.collider.name=="Cube (4)")
+        {
+            rend.material.color=Color.yellow;
+        }
+           else if(col.collider.name=="Cube (5)")
+        {
+            rend.material.color=Color.black;
+        }
+    }
+}
